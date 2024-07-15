@@ -1,12 +1,17 @@
 import os 
-import sys 
+import logging 
+import time 
+from watchdog.observers import Observer 
+from watchdog.events import LoggingEventHandler 
 
 # File Types 
 
-audio = [".mp3", ".wav"]
-images = [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".svg"] 
-document_types = [".doc", ".docx", ".odt", ".pdf", ".xls", ".xlsx" ".ppt", ".pptx", ".txt"]
-virtual_machines = [".iso", ".img", ".vdi", ".vmdk", ".vhd", ".vdi"] 
+file_extensions = {
+    'audio': [".mp3", ".wav"],
+    'images': [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".svg"],
+    'document_types': [".doc", ".docx", ".odt", ".pdf", ".xls", ".xlsx", ".ppt", ".pptx", ".txt"],
+    'virtual_machines': [".iso", ".img", ".vdi", ".vmdk", ".vhd", ".vdi"]
+}
 
 # Directory Paths 
 
@@ -38,3 +43,8 @@ print("[+] Files Currently in Downloads")
 
 for file in os.scandir(downloads_path): 
     print(file.name) 
+
+print("[+] Moving Files to Corresponding Directories")
+
+
+
