@@ -1,0 +1,49 @@
+Certainly! Here's your JSON formatted in a more readable way:
+
+json
+
+[
+    {
+        "name": "Music",
+        "extensions": [
+            ".mp3",
+            ".wav"
+        ]
+    },
+    {
+        "name": "Pictures",
+        "extensions": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".gif",
+            ".bmp",
+            ".svg"
+        ]
+    },
+    {
+        "name": "Documents",
+        "extensions": [
+            ".doc",
+            ".doxc",
+            ".odt",
+            ".pdf",
+            ".xls",
+            ".xlsx",
+            ".ppt",
+            ".pptx",
+            ".txt"
+        ]
+    },
+    {
+        "name": "virtualmachines",
+        "extensions": [
+            ".iso",
+            ".img",
+            ".vdi",
+            ".vmdk",
+            ".vhd",
+            ".vdi"
+        ]
+    }
+]
