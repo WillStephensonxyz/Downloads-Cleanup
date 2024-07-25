@@ -1,32 +1,16 @@
 import os 
 import shutil 
+from pathlib import Path
 import json 
-
-# Directory Paths 
-
-user = os.path.expanduser("~") 
-downloads_path = f"{user}/Downloads" 
-existingFiles = os.scandir(downloads_path) 
-
-audio_path = f"{user}/Music" 
-images_path = f"{user}/Pictures"
-documents_path = f"{user}/Documents" 
-virtual_machine_path = f"{user}/virtualmachines" 
-
-directory_list = [downloads_path, audio_path, images_path, documents_path, virtual_machine_path] 
 
 # Check if destination directories exist, create them if not. Then move files 
 
 def moveFiles(file, destination): 
-    print("[+] Checking if Destination Directories Exist") 
+    print(f"[+] Moving {file.name} to {destination}") 
     try:
-        for dir in directory_list:
-            if os.path.exists(dir) == True: 
-                print(f"{dir} exists") 
-            else: 
-                os.mkdir(dir) 
-                print(f"Created directory at {dir}")
-        shutil.move(file, destination)
+        if not destination.exists(): 
+            destination.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(file), str(destination))
     except shutil.Error as e:
         print(e)
 
@@ -35,14 +19,20 @@ def moveFiles(file, destination):
 def sortDownloads(downloads_path):
     with open("fileconfig.json", "r" ) as f: 
         file_types = json.load(f) 
+        extension_map = {}
 
-    for file in file_types:
-        destination = file["name"]
-
+    for category in file_types:
+        folder_type = category["name"]
+        for extension in category["extensions"]:
+           extension_map[extension] = folder_type
+            
+    for file in downloads_path.iterdir(): 
+        if file.is_file() and not file.name.startswith("."):
+            destination = extension_map.get(file.suffix, "Other") 
+            moveFiles(file, Path(user).joinpath(destination)) 
 
 if __name__ == "__main__": 
-    user = os.path.expanduser("~") 
-    downloads_path = f"{user}/Downloads" 
-    existingFiles = os.scandir(downloads_path) 
+    user = str(Path.home()) 
+    downloads_path = Path(f"{user}/Downloads") 
 
     sortDownloads(downloads_path) 
