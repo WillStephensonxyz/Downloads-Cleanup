@@ -3,13 +3,20 @@ import shutil
 from pathlib import Path
 import json 
 
-# Check if destination directories exist, create them if not. Then move files 
+# Check if destination directories exist and move them
+
+def directoryCheck():
+    for directory in destination_directories: 
+        dir_path = Path(f"{user}/{directory}")  
+        if not dir_path.exists():
+            print(f"Created {dir_path}")
+            dir_path.mkdir(parents=True, exist_ok=True) 
+
+# Function to move files 
 
 def moveFiles(file, destination): 
-    print(f"[+] Moving {file.name} to {destination}") 
+    print(f"Moving {file.name} to {destination}") 
     try:
-        if not destination.exists(): 
-            destination.mkdir(parents=True, exist_ok=True)
         shutil.move(str(file), str(destination))
     except shutil.Error as e:
         print(e)
@@ -17,6 +24,7 @@ def moveFiles(file, destination):
 # Map files to extensions and appropriate directory. 
 
 def sortDownloads(downloads_path):
+    directoryCheck() 
     with open("fileconfig.json", "r" ) as f: 
         file_types = json.load(f) 
         extension_map = {}
@@ -34,5 +42,13 @@ def sortDownloads(downloads_path):
 if __name__ == "__main__": 
     user = str(Path.home()) 
     downloads_path = Path(f"{user}/Downloads") 
+    destination_directories = ["Documents", "Music", "Pictures", "virtualmachines"] 
 
+    """
+    for directory in destination_directories: 
+        dir_path = Path(f"{user}/{directory}")  
+        if not dir_path.exists():
+            print(f"Created {dir_path}")
+            dir_path.mkdir(parents=True, exist_ok=True) 
+    """
     sortDownloads(downloads_path) 
