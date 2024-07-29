@@ -25,7 +25,7 @@ def moveFiles(file, destination):
 
 def sortDownloads(downloads_path):
     directoryCheck() 
-    with open("fileconfig.json", "r" ) as f: 
+    with open(f"{user}/work/downloads/Downloads-Cleanup/fileconfig.json", "r" ) as f: 
         file_types = json.load(f) 
         extension_map = {}
 

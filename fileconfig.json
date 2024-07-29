@@ -41,5 +41,12 @@
             ".vhd",
             ".vdi"
         ]
+    },
+    {
+        "name": "software", 
+        "extensions": [
+            ".gz",
+            ".deb"
+        ]
     }
 ]
