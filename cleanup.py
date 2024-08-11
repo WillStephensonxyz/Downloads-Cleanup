@@ -25,7 +25,7 @@ def moveFiles(file, destination):
 
 def sortDownloads(downloads_path):
     directoryCheck() 
-    with open(f"{user}/work/downloads/Downloads-Cleanup/fileconfig.json", "r" ) as f: 
+    with open(f"{config_path}", "r" ) as f: 
         file_types = json.load(f) 
         extension_map = {}
 
@@ -41,14 +41,11 @@ def sortDownloads(downloads_path):
 
 if __name__ == "__main__": 
     user = str(Path.home()) 
+    
+    script_path = Path(__file__).resolve() 
+    config_path = script_path.with_name("fileconfig.json") 
+
     downloads_path = Path(f"{user}/Downloads") 
     destination_directories = ["Documents", "Music", "Pictures", "virtualmachines"] 
 
-    """
-    for directory in destination_directories: 
-        dir_path = Path(f"{user}/{directory}")  
-        if not dir_path.exists():
-            print(f"Created {dir_path}")
-            dir_path.mkdir(parents=True, exist_ok=True) 
-    """
     sortDownloads(downloads_path) 
