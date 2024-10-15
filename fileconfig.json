@@ -46,7 +46,8 @@
         "name": "software", 
         "extensions": [
             ".gz",
-            ".deb"
+            ".deb",
+            ".AppImage"
         ]
     }
 ]
