@@ -1,2 +1,2 @@
 # Downloads-Cleanup
-Python Script That Cleans up Downloads Folder
+python script that cleansup downloads folder
